@@ -41,7 +41,7 @@ export default function StaticDataProvider({
 			try {
 				const response = await fetch(`/api/${route}`, {
 					// cache: "force-cache",
-					cache: "no-cache",
+					cache: "force-cache",
 				});
 				if (!response.ok) {
 					throw new Error("Network response was not ok");
