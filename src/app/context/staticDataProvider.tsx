@@ -1,13 +1,27 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { AttacksInfo } from "@/helper/getAttacks";
 import { AbilitiesInfo } from "@/helper/getAbilities";
 import { ItemsInfo } from "@/helper/getItems";
 import { NaturesInfo } from "@/helper/getNatures";
 import { PokedexInfo } from "@/helper/getPokedex";
 
-export const StaticDataContext = createContext<AttacksInfo[]>([]);
+interface StaticData {
+	attacksData: AttacksInfo[];
+	abilitiesData: AbilitiesInfo[];
+	itemsData: ItemsInfo[];
+	naturesData: NaturesInfo[];
+	pokedexData: PokedexInfo[];
+}
+
+export const StaticDataContext = createContext<StaticData>({
+	attacksData: [],
+	abilitiesData: [],
+	itemsData: [],
+	naturesData: [],
+	pokedexData: [],
+});
 
 export default function StaticDataProvider({
 	children,
@@ -70,11 +84,11 @@ export default function StaticDataProvider({
 	return (
 		<StaticDataContext.Provider
 			value={{
-				value1: attacksData,
-				value2: abilitiesData,
-				value3: itemsData,
-				value4: naturesData,
-				value5: pokedexData,
+				attacksData,
+				abilitiesData,
+				itemsData,
+				naturesData,
+				pokedexData,
 			}}
 		>
 			{children}

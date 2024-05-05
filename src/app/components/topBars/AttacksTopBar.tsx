@@ -7,14 +7,19 @@ import { StaticDataContext } from "@/app/context/staticDataProvider";
 import { AttacksContext } from "@/app/context/attacksProvider";
 
 const AttacksTopBar: React.FC = () => {
-	const { value1 } = useContext(StaticDataContext);
+	const { attacksData } = useContext(StaticDataContext);
 	const { attack, setAttack } = useContext(AttacksContext);
 
 	const handleChange = (newValue: string) => {
-		const final = value1.find(
+		const final = attacksData.find(
 			(attack: AttacksInfo) => attack.Name === newValue
 		);
-		setAttack(final);
+
+		if (final) {
+			setAttack(final);
+		} else {
+			console.error("No existe ese ataque.");
+		}
 	};
 
 	return (
@@ -29,7 +34,7 @@ const AttacksTopBar: React.FC = () => {
 					<Select
 						size="large"
 						showSearch
-						value={attack}
+						value={attack ? attack.Name : undefined}
 						placeholder={"Search"}
 						className={styles.select}
 						defaultActiveFirstOption={false}
@@ -44,7 +49,7 @@ const AttacksTopBar: React.FC = () => {
 						}
 						onChange={handleChange}
 						notFoundContent={null}
-						options={(value1 || []).map((d: AttacksInfo) => ({
+						options={(attacksData || []).map((d: AttacksInfo) => ({
 							value: d.Name,
 							label: d.Name,
 						}))}

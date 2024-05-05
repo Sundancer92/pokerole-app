@@ -2,22 +2,12 @@
 import { useContext } from "react";
 import { StaticDataContext } from "../context/staticDataProvider";
 import { AttacksContext } from "../context/attacksProvider";
-import {
-	Col,
-	Flex,
-	Row,
-	List,
-	Avatar,
-	DescriptionsProps,
-	Descriptions,
-} from "antd";
+import { Col, Row, List, DescriptionsProps, Descriptions } from "antd";
 import { AttacksInfo } from "@/helper/getAttacks";
-// import "";
 
 const page = () => {
-	const { value1 } = useContext(StaticDataContext);
+	const { attacksData } = useContext(StaticDataContext);
 	const { attack, setAttack } = useContext(AttacksContext);
-	console.log(attack);
 
 	let attackDetails: DescriptionsProps["items"] = [
 		{
@@ -63,7 +53,7 @@ const page = () => {
 							size: "small",
 							simple: true,
 						}}
-						dataSource={value1}
+						dataSource={attacksData}
 						renderItem={(item: AttacksInfo, index) => (
 							<List.Item
 								className={item.Type}
