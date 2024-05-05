@@ -1,10 +1,3 @@
-/* .backgroundImg {
-	background-image: url(./../../public/images/Background/serebiAltarDay.jpg);
-	object-fit: cover;
-	width: 100vw;
-	height: 100vh;
-} */
-
 .appBg {
 	display: flex;
 	justify-content: center;

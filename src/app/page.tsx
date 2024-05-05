@@ -1,8 +1,13 @@
+"use client";
+import { useContext } from "react";
+import { StaticDataContext } from "./context/staticDataProvider";
 import { Button, Col, Row } from "antd";
 import styles from "./page.module.css";
 import Link from "next/link";
 
 export default function Home() {
+	const attacks = useContext(StaticDataContext);
+
 	return (
 		<main className={styles.appBg}>
 			<div className={styles.buttonsContainer}>

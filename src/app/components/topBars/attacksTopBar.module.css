@@ -1,0 +1,12 @@
+.topBar {
+	width: 100vw;
+	height: 50px;
+	background-color: red;
+	/* display: flex;
+	align-items: center; */
+}
+
+.select {
+	width: 200px;
+	margin-right: 10px;
+}
