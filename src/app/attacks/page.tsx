@@ -5,6 +5,8 @@ import { AttacksContext } from "../context/attacksProvider";
 import { Col, Row, List, DescriptionsProps, Descriptions } from "antd";
 import { AttacksInfo } from "@/helper/getAttacks";
 
+import styles from "./page.module.css";
+
 const page = () => {
 	const { attacksData } = useContext(StaticDataContext);
 	const { attack, setAttack } = useContext(AttacksContext);
@@ -42,43 +44,48 @@ const page = () => {
 	];
 	return (
 		<div>
-			<Row>
-				<Col span={8}>
-					<List
-						pagination={{
-							position: "bottom",
-							align: "center",
-							defaultPageSize: 7,
-							showSizeChanger: false,
-							size: "small",
-							simple: true,
-						}}
-						dataSource={attacksData}
-						renderItem={(item: AttacksInfo, index) => (
-							<List.Item
-								className={item.Type}
-								style={{ padding: 0, paddingLeft: 10 }}
-							>
-								<List.Item.Meta
-									// title={<a href="https://ant.design">{item.title}</a>}
-									title={
-										<p
-											onClick={() => setAttack(item)}
-											style={{ margin: 0 }}
-										>
-											{item.Name}
-										</p>
-									}
-									// avatar={
-									// 	<Avatar
-									// 		src={`./`}
-									// 	/>
-									// }
-									// description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-								/>
-							</List.Item>
-						)}
-					/>
+			<Row className={styles.attacksListContainer}>
+				<Col
+					span={6}
+					offset={1}
+				>
+					<div className={styles.attacksList}>
+						<List
+							pagination={{
+								position: "bottom",
+								align: "center",
+								defaultPageSize: 7,
+								showSizeChanger: false,
+								size: "small",
+								simple: true,
+							}}
+							dataSource={attacksData}
+							renderItem={(item: AttacksInfo, index) => (
+								<List.Item
+									className={`${item.Type} ${styles.attacksList}`}
+								>
+									<List.Item.Meta
+										// title={<a href="https://ant.design">{item.title}</a>}
+										title={
+											<p
+												onClick={() => setAttack(item)}
+												// style={{ margin: 0 }}
+												className={styles.listItem}
+											>
+												{item.Name}
+											</p>
+										}
+										// avatar={
+										// 	<Avatar
+										// 		src={`./`}
+										// 	/>
+										// }
+										// description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+									/>
+								</List.Item>
+							)}
+						/>
+					</div>
 				</Col>
 				<Col span={16}>
 					{attack != undefined && (

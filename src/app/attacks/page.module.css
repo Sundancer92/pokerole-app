@@ -1,0 +1,14 @@
+.attacksListContainer {
+	margin-top: 10px !important;
+}
+
+.attacksList {
+	padding: 5px !important;
+}
+
+.listItem {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}

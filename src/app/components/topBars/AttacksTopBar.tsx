@@ -39,6 +39,7 @@ const AttacksTopBar: React.FC = () => {
 						className={styles.select}
 						defaultActiveFirstOption={false}
 						suffixIcon={null}
+						allowClear={true}
 						filterOption={(input, option) =>
 							(option?.label ?? "").includes(input)
 						}

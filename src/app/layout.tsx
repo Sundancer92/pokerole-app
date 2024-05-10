@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ConfigProvider } from "antd";
 import StaticDataProvider from "./context/staticDataProvider";
+import FullScreenDemo from "@/helper/FullScreen/fullscreen";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,9 +16,26 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<StaticDataProvider>
-				<body>{children}</body>
-			</StaticDataProvider>
+			<ConfigProvider
+				theme={{
+					components: {
+						// List: {
+						// 	descriptionFontSize: 5,
+						// 	footerBg: "#000",
+						// 	itemPadding: "0px 15px",
+						// 	metaMarginBottom: "bottom: 0",
+						// 	emptyTextPadding: "padding: 0px",
+						// },
+					},
+				}}
+			>
+				<StaticDataProvider>
+					<body>
+						<FullScreenDemo />
+						{children}
+					</body>
+				</StaticDataProvider>
+			</ConfigProvider>
 		</html>
 	);
 }
