@@ -19,9 +19,8 @@ export default function RootLayout({
 		<ConfigProvider
 			theme={{
 				components: {
-					List: {
-						// itemPadding: "0px 15px",
-						// borderRadius: 10,
+					Descriptions: {
+						titleMarginBottom: -1,
 					},
 				},
 				token: {

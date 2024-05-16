@@ -1,10 +1,12 @@
 "use client";
 import React, { useContext, useState } from "react";
 import styles from "./attacksTopBar.module.css";
-import { Flex, Col, Row, Select } from "antd";
+import { Flex, Col, Row, Select, Button } from "antd";
 import { AttacksInfo } from "@/helper/getAttacks";
 import { StaticDataContext } from "@/app/context/staticDataProvider";
 import { AttacksContext } from "@/app/context/attacksProvider";
+import { LeftCircleOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 const AttacksTopBar: React.FC = () => {
 	const { attacksData } = useContext(StaticDataContext);
@@ -25,16 +27,44 @@ const AttacksTopBar: React.FC = () => {
 	return (
 		<Flex
 			align="center"
-			justify="end"
+			justify="space-around"
 			style={{}}
 			className={styles.topBar}
 		>
-			<Row>
-				<Col span={6}>
+			<Row style={{ width: "100%" }}>
+				<Col
+					span={15}
+					offset={1}
+					style={{ display: "flex", alignItems: "center" }}
+				>
+					<div>
+						<Link
+							href={"/"}
+							style={{}}
+						>
+							<Button
+								// type="primary"
+								icon={<LeftCircleOutlined />}
+								shape="circle"
+								style={{
+									fontSize: 30,
+									backgroundColor: "white",
+									border: "none",
+								}}
+							></Button>
+						</Link>
+					</div>
+				</Col>
+
+				<Col
+					span={8}
+					pull={1}
+					style={{ display: "flex", justifyContent: "end" }}
+				>
 					<Select
 						size="large"
 						showSearch
-						value={attack ? attack.Name : undefined}
+						value={attack ? attack.Name : ""}
 						placeholder={"Search"}
 						className={styles.select}
 						defaultActiveFirstOption={false}

@@ -2,11 +2,10 @@
 	width: 100vw;
 	height: 50px;
 	background-color: red;
-	/* display: flex;
-	align-items: center; */
+	border-bottom: 2px solid black;
 }
 
 .select {
 	width: 200px;
-	margin-right: 10px;
+	/* margin-right: 10px; */
 }

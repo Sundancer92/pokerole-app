@@ -3,9 +3,12 @@ import { useContext } from "react";
 import { StaticDataContext } from "../context/staticDataProvider";
 import { AttacksContext } from "../context/attacksProvider";
 import { Col, Row, List, DescriptionsProps, Descriptions } from "antd";
+
 import { AttacksInfo } from "@/helper/getAttacks";
+import typeColor from "@/helper/Colors/switchTypeColors";
 
 import styles from "./page.module.css";
+import DescriptionsItem from "antd/es/descriptions/Item";
 
 const page = () => {
 	const { attacksData } = useContext(StaticDataContext);
@@ -14,58 +17,56 @@ const page = () => {
 	let attackDetails: DescriptionsProps["items"] = [
 		{
 			label: "Accuracy",
-			// span: { xs: 2, sm: 2, md: 2, lg: 3, xl: 2, xxl: 2 },
-			// span: { xs: 1 },
 			children: `${attack?.Accuracy1} + ${attack?.Accuracy2}`,
+			// labelStyle: { padding: "10px" },
+			// contentStyle: { padding: "10px" },
 		},
 		{
 			label: "Damage",
-			// span: { xs: 2, sm: 2, md: 2, lg: 3, xl: 2, xxl: 2 },
-			// span: { xs: 1 },
 			children: attack?.Damage1
 				? `${attack.Damage1} + ${attack.Power}`
 				: "-",
 		},
 		{
 			label: "Target",
-			// span: { xs: 1 },
 			children: attack?.Target,
 		},
 		{
 			label: "Effect",
-			// span: { xs: 1 },
 			children: attack?.Effect,
 		},
 		{
 			label: "Description",
-			// span: { xs: 1 },
 			children: attack?.Description,
+			labelStyle: {},
 		},
 	];
 	return (
 		<div>
-			<Row className={styles.attacksListContainer}>
+			<Row>
 				<Col
-					span={6}
+					span={7}
 					offset={1}
+					className={styles.attacksListContainer}
 				>
 					<div className={styles.attacksList}>
 						<List
 							pagination={{
 								position: "bottom",
 								align: "center",
-								defaultPageSize: 7,
+								defaultPageSize: 8,
 								showSizeChanger: false,
 								size: "small",
 								simple: true,
+								style: { marginTop: -15 },
 							}}
 							dataSource={attacksData}
 							renderItem={(item: AttacksInfo, index) => (
 								<List.Item
 									className={`${item.Type} ${styles.attacksList}`}
+									style={{ border: "2px solid black" }}
 								>
 									<List.Item.Meta
-										// title={<a href="https://ant.design">{item.title}</a>}
 										title={
 											<p
 												onClick={() => setAttack(item)}
@@ -75,51 +76,118 @@ const page = () => {
 												{item.Name}
 											</p>
 										}
-										// avatar={
-										// 	<Avatar
-										// 		src={`./`}
-										// 	/>
-										// }
-										// description="Ant Design, a design language for background applications, is refined by Ant UED Team"
 									/>
 								</List.Item>
 							)}
 						/>
 					</div>
 				</Col>
-				<Col span={16}>
+				<Col span={15}>
 					{attack != undefined && (
 						<Descriptions
-							style={{ marginRight: 10, marginLeft: 10 }}
+							style={{
+								marginRight: 10,
+								marginLeft: 10,
+							}}
 							title={
 								<div
+									id="descriptionsTitle"
 									style={{
-										margin: "5px 0 0 0",
+										margin: "5px 0 0 1px",
 										display: "flex",
 										justifyContent: "space-between",
-										border: "2px solid black",
-										borderRadius: 10,
-										padding: "0 5px",
+										// border: "2px solid black",
+										borderTopLeftRadius: 10,
+										borderTopRightRadius: 10,
+										padding: "0 10px",
 									}}
 									className={attack.Type}
 								>
-									<p style={{ margin: 0 }}>{attack?.Name}</p>
+									<p style={{ margin: 0, paddingBottom: 3 }}>
+										{attack?.Name}
+									</p>
 									<p
 										style={{
 											margin: 0,
+											paddingBottom: 3,
 										}}
 									>
 										{attack.Type}
 									</p>
-									<p style={{ margin: 0 }}>POWER: {attack.Power}</p>
-									<p style={{ margin: 0 }}>{attack.Category}</p>
+									<p style={{ margin: 0, paddingBottom: 3 }}>
+										POWER: {attack.Power}
+									</p>
+									<p style={{ margin: 0, paddingBottom: 3 }}>
+										{attack.Category}
+									</p>
 								</div>
 							}
 							bordered
-							items={attackDetails}
-							// column={{ xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 4 }}
 							column={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 2 }}
-						/>
+						>
+							<DescriptionsItem
+								label="Accuracy"
+								labelStyle={{
+									backgroundColor: typeColor(attack?.Type),
+									fontWeight: 600,
+									color: "white",
+									// borderTopLeftRadius: 10,
+								}}
+								contentStyle={{
+									padding: "10px 10px",
+									borderTopRightRadius: 0,
+								}}
+							>
+								{attack?.Accuracy1} + {attack?.Accuracy2}
+							</DescriptionsItem>
+							<DescriptionsItem
+								label="Damage"
+								labelStyle={{
+									backgroundColor: typeColor(attack?.Type),
+									fontWeight: 600,
+									color: "white",
+								}}
+								contentStyle={{ padding: "10px 10px" }}
+							>
+								{attack?.Damage1
+									? `${attack.Damage1} + ${attack.Power}`
+									: "-"}
+							</DescriptionsItem>
+							<DescriptionsItem
+								label="Target"
+								labelStyle={{
+									backgroundColor: typeColor(attack?.Type),
+									fontWeight: 600,
+									color: "white",
+								}}
+								contentStyle={{ padding: "10px 10px" }}
+							>
+								{attack?.Target}
+							</DescriptionsItem>
+							<DescriptionsItem
+								label={"Effect"}
+								labelStyle={{
+									backgroundColor: typeColor(attack?.Type),
+									fontWeight: 600,
+									color: "white",
+								}}
+								contentStyle={{ padding: "10px 10px" }}
+							>
+								{attack?.Effect}
+							</DescriptionsItem>
+							<DescriptionsItem
+								label="Description"
+								labelStyle={{
+									backgroundColor: typeColor(attack?.Type),
+									fontWeight: 600,
+									color: "white",
+									borderBottomLeftRadius: 10,
+								}}
+								contentStyle={{ padding: "10px 10px" }}
+							>
+								{attack?.Description}
+							</DescriptionsItem>
+						</Descriptions>
 					)}
 				</Col>
 			</Row>
